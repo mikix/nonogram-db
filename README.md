@@ -16,6 +16,12 @@ This database is an attempt to improve on the status quo.
 
 All puzzle files can be found in the `db` directory.  Related puzzles will be collected in subdirectories, along with relevant information in README.md files.
 
+## Quality
+
+This database will only ship puzzles that have a unique solution that can be solved via logic.
+
+Additionally, it is desirable that the puzzle reveal a picture and have a name that does not obviously give away what the picture is.
+
 ## Format
 
 An additional complication for writing a nonogram app is that there are many many formats ([at least 26](http://webpbn.com/export.cgi)) for puzzle files.  None are particularly bizarre or innovative.  They are all just different.
