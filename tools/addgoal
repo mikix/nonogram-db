@@ -1,0 +1,40 @@
+#!/bin/sh
+#
+# Copyright 2015 Michael Terry
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation; version 3.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# This script calls Jan Wolter's pbnsolve program (make sure it's in PATH)
+# on all 'non' file arguments and adds the solution it finds to them.
+
+set -e
+
+WORKFILE=$(mktemp)
+
+for f in $@; do
+    pbnsolve -u $f >$WORKFILE
+
+    if ! grep 'UNIQUE LINE SOLUTION:' $WORKFILE >/dev/null; then
+        echo "$f does not have a unique line solution!"
+        cat $WORKFILE
+        continue
+    fi
+
+    GOAL=$(tail -n +3 $WORKFILE | tr '.' '0' | tr 'X' '1' | tr -d '\n')
+
+    sed -i '/^goal /d' $f
+    echo "goal \"$GOAL\"" >> $f
+
+done
+
+rm -f $WORKFILE
