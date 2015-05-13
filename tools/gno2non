@@ -27,6 +27,8 @@ print("catalogue \"" + "gnonograms " + os.path.basename(sys.argv[1]) + "\"")
 assert f.readline() == "[Description]\n"
 print("title \"" + f.readline().strip() + "\"")
 author = f.readline().strip()
+if author == "Fido":
+    author = "Frederico Vera <dktcoding@gmail.com>"
 print("by \"" + author + "\"")
 print("copyright \"© " + f.readline().split("/")[0] + " " + author + "\"")
 f.readline() # skip score
@@ -53,7 +55,8 @@ print("columns")
 for i in range(int(cols)):
     print(f.readline().strip())
 
-assert f.readline() == "[Solution]\n"
+if f.readline() != "[Solution]\n":
+    sys.exit(0)
 goal = ""
 for i in range(int(rows)):
     goal += f.readline().strip() + " "
