@@ -43,6 +43,14 @@
 
 You can bundle more than one puzzle in the same file.  Just separate them with a divider of four `=` characters like `====` on a line by itself.  Use the file extension `nonpack` to denote such bundles.  This can be useful to logically group a sequence of puzzles and avoid many tiny files.
 
+Obviously, you should probably only bundle files with compatible licenses.
+
+You may also consider compressing your nonpacks with zlib and shipping them as `nonopack.gz` files.
+
+## Identification
+
+In order to identify a given puzzle (e.g. to store state data about it), you may be tempted to use the filename or puzzle name.  But I'd recommend a hash of the `rows` and `columns` hint data.  That will survive name changes and should still uniquely identify a given puzzle.  If the hints change, it's a different puzzle after all!
+
 ## Example
 
     catalogue "webpbn.com #1"
