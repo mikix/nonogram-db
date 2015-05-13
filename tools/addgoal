@@ -19,6 +19,7 @@
 
 set -e
 
+STATUS=0
 WORKFILE=$(mktemp)
 
 for f in $@; do
@@ -27,14 +28,17 @@ for f in $@; do
     if ! grep 'UNIQUE LINE SOLUTION:' $WORKFILE >/dev/null; then
         echo "$f does not have a unique line solution!"
         cat $WORKFILE
+        STATUS=1
         continue
     fi
 
     GOAL=$(tail -n +3 $WORKFILE | tr '.' '0' | tr 'X' '1' | tr -d '\n')
 
-    sed -i '/^goal /d' $f
-    echo "goal \"$GOAL\"" >> $f
-
+    if ! grep "goal \"$GOAL\"" $f >/dev/null; then
+        sed -i '/^goal /d' $f
+        echo "goal \"$GOAL\"" >> $f
+    fi
 done
 
 rm -f $WORKFILE
+exit $STATUS
