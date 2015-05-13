@@ -1,0 +1,61 @@
+#!/usr/bin/env python3
+#
+# Copyright 2015 Michael Terry
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation; version 3.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+import sys
+
+f = open(sys.argv[1], 'rb')
+
+assert f.read(3) == b'TLS'
+f.read(4) # skip CRC
+
+flags = ord(f.read(1))
+cols = ord(f.read(1))
+rows = ord(f.read(1))
+print("width " + str(cols))
+print("height " + str(rows))
+
+assert not flags & 0x40
+
+print()
+print("columns")
+for i in range(cols):
+    count = ord(f.read(1))
+    data = f.read(count)
+    line = ""
+    for d in data:
+        if line:
+            line += ","
+        line += str(d)
+    print(line)
+
+print()
+print("rows")
+for i in range(rows):
+    count = ord(f.read(1))
+    data = f.read(count)
+    line = ""
+    for d in data:
+        if line:
+            line += ","
+        line += str(d)
+    print(line)
+
+if flags & 0x80:
+    line = "goal \""
+    while i in range(rows * cols):
+        goal += str(ord(f.read(1)))
+    line += "\""
+    print(line)

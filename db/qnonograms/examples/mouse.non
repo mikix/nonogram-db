@@ -1,0 +1,46 @@
+catalogue "qnonograms mouse.jap"
+title "Not a Rat"
+by "Alexander Meshcheryakov <alexander.s.m@gmail.com>"
+copyright "© 2007 Alexander Meshcheryakov <alexander.s.m@gmail.com>"
+license GPL-2.0
+width 25
+height 10
+
+columns
+2
+2
+2
+3
+1,1,2
+3,5
+10
+9
+8
+5
+7
+8
+8
+8
+7
+7
+5
+4
+3
+1
+1
+1
+1
+1
+2
+
+rows
+2
+4
+5,5
+4,7
+12
+15
+1,2,14
+19,2
+1,13,2,2
+2,4,1
