@@ -27,13 +27,13 @@
 * `license`: either license code from [SPDX][spdx] (non-quoted-string) or a quoted string freeform description
 [spdx]: http://spdx.org/licenses/
 
-* `color`: followed by a character designation (usually a letter), then a space, then a six-digit hex color like #808080 (an example would be `color a #ff0000`); can be specified multiple times for multiple characters; these characters are used in the `rows`, `columns`, and `goal` keys; color designation characters may be present in such even if no `color` keys were specified, in which case the puzzle interface can pick its own colors
+* `color`: followed by a character designation (from a-z), then a space, then a six-digit hex color like #808080 (an example would be `color a #ff0000`); can be specified multiple times for multiple characters; these characters are used in the `rows`, `columns`, and `goal` keys; color designation characters may be present in such even if no `color` keys were specified, in which case the puzzle interface can pick its own colors
 
 * `width`: int; number of columns
 
 * `height`: int; number of rows
 
-* `rows`: starts a sequence of lines, in number equal to `height`; represents the hints for each row; blank lines may be present if a row has no hints; each hint is a number, followed by an optional color character, separated by a comma from the next hint (an example multi-colored line would be `3b,1d,6b,4c,3a,1b,2b`)
+* `rows`: starts a sequence of lines, in number equal to `height`; represents the hints for each row; blank lines may be present if a row has no hints; each hint is a number, followed by an optional color character, separated by a comma from the next hint (an example multi-colored line would be `3b,1d,6b,4c,3a,1b,2b`); any characters after the number that aren't recognized should be ignored
 
 * `columns`: same deal as `rows` but for columns
 
