@@ -1,3 +1,4 @@
+///bin/true; exec /usr/bin/env go run "$0" "$@"
 // -*- Mode: Go; indent-tabs-mode: t; tab-width: 8 -*-
 /*
  * Copyright 2015 Michael Terry
