@@ -1,0 +1,64 @@
+#!/usr/bin/env python3
+#
+# Copyright 2015 Michael Terry
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation; version 3.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+import os
+import sys
+
+# I assume strict input format, because I can't be bothered
+# to make this general purpose.
+
+f = open(sys.argv[1])
+
+print("catalogue \"" + "gnonograms " + os.path.basename(sys.argv[1]) + "\"")
+
+assert f.readline() == "[Description]\n"
+print("title \"" + f.readline().strip() + "\"")
+author = f.readline().strip()
+print("by \"" + author + "\"")
+print("copyright \"© " + f.readline().split("/")[0] + " " + author + "\"")
+f.readline() # skip score
+
+assert f.readline() == "[License]\n"
+assert f.readline() == "CC BY-SA\n"
+print("license CC-BY-SA-4.0") # pick a version, allowed if BY-SA for adaptations
+
+assert f.readline() == "[Dimensions]\n"
+rows = f.readline().strip()
+print("height " + rows)
+cols = f.readline().strip()
+print("width " + cols)
+
+assert f.readline() == "[Row clues]\n"
+print()
+print("rows")
+for i in range(int(rows)):
+    print(f.readline().strip())
+
+assert f.readline() == "[Column clues]\n"
+print()
+print("columns")
+for i in range(int(cols)):
+    print(f.readline().strip())
+
+assert f.readline() == "[Solution]\n"
+goal = ""
+for i in range(int(rows)):
+    goal += f.readline().strip() + " "
+goal = goal.replace("1", "0")
+goal = goal.replace("2", "1")
+goal = goal.replace(" ", "")
+print()
+print("goal \"" + goal + "\"")
