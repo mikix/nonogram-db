@@ -23,9 +23,9 @@ STATUS=0
 WORKFILE=$(mktemp)
 
 for f in $@; do
-    pbnsolve -u $f >$WORKFILE
+    pbnsolve -u -aLHEC $f >$WORKFILE
 
-    if ! grep 'UNIQUE LINE SOLUTION:' $WORKFILE >/dev/null; then
+    if ! grep 'UNIQUE' $WORKFILE >/dev/null; then
         echo "$f does not have a unique line solution!"
         cat $WORKFILE
         STATUS=1
