@@ -22,6 +22,15 @@ This database will only ship puzzles that have a unique solution that can be sol
 
 Additionally, it is desirable that the puzzle reveal a picture and have a name that does not obviously give away what the picture is.
 
+## Random Puzzles
+
+There is also a generator included in the `tools` folder.  To find the first three solvable 5x5 nonograms that are rated difficulty 4 or higher, use the following command (with an install of Jan Wolter's pbnsolve at `~/pbnsolve`):
+
+    cd tools
+    PATH=~/pbnsolve:$PATH ./findpuzzle.go -d 4+ -n 3 5 5 0
+
+This won't generate a pretty picture.  But they are still good logic puzzles.
+
 ## Format
 
 An additional complication for writing a nonogram app is that there are many many formats ([at least 26](http://webpbn.com/export.cgi)) for puzzle files.  None are particularly bizarre or innovative.  They are all just different.

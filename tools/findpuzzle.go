@@ -22,6 +22,7 @@ import (
 	"flag"
 	"fmt"
 	"io/ioutil"
+	"math"
 	"os"
 	"os/exec"
 	"regexp"
@@ -60,6 +61,8 @@ func main() {
 		maxDifficulty = minDifficulty
 	}
 
+	maxSeedLength := len(fmt.Sprintf("%v", uint64(math.MaxUint64)))
+
 	for count := uint(0); count < *n; {
 		cmd := exec.Command("go", "run", "./generate.go", fmt.Sprintf("%v", height), fmt.Sprintf("%v", width), fmt.Sprintf("%v", seed))
 		output, err := cmd.Output()
@@ -83,7 +86,7 @@ func main() {
 			difficulty, _ := strconv.Atoi(string(matches[1]))
 
 			if difficulty >= minDifficulty && (maxDifficulty == 0 || difficulty <= maxDifficulty) {
-				newfile := fmt.Sprintf("%vx%v.%v.%v.non", width, height, difficulty, seed)
+				newfile := fmt.Sprintf("%02vx%02v.%03v.%0*v.non", height, width, difficulty, maxSeedLength, uint64(seed))
 				os.Rename(file.Name(), newfile)
 				fmt.Println("Wrote", newfile)
 				count++
