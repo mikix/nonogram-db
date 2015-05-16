@@ -74,7 +74,7 @@ func main() {
 		file.Write(output)
 		file.Close()
 
-		cmd = exec.Command("pbnsolve", "-u", "-aLHEC", "-t", "-f", "non", file.Name())
+		cmd = exec.Command("pbnsolve", "-u", "-aLHEC", "-t", "-f", "non", "-d", "5", file.Name())
 		output, err = cmd.Output()
 		if err != nil {
 			panic(err)
